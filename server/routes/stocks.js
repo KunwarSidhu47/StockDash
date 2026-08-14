@@ -21,6 +21,8 @@ router.get('/search', async (req, res) => {
 
   try {
     const results = await yahooFinance.search(q);
+    if (!results || !results.quotes || results.quotes.length === 0) throw new Error('Empty search results');
+    
     const quotes = results.quotes.filter(q => q.isYahooFinance);
     const formattedResults = quotes.map(q => ({
       symbol: q.symbol,
@@ -28,6 +30,7 @@ router.get('/search', async (req, res) => {
       exchange: q.exchDisp,
       type: q.quoteType,
     }));
+    if (formattedResults.length === 0) throw new Error('Empty formatted search results');
     res.json(formattedResults);
   } catch (error) {
     console.error(`Yahoo Finance search blocked for ${q}, using fallback data.`);
@@ -41,6 +44,8 @@ router.get('/search', async (req, res) => {
 router.get('/trending', async (req, res) => {
   try {
     const trendingData = await yahooFinance.trendingSymbols('US');
+    if (!trendingData || !trendingData.quotes || trendingData.quotes.length === 0) throw new Error('Empty trending results');
+    
     const symbols = trendingData.quotes.map(q => q.symbol).slice(0, 5);
     const quotes = await Promise.all(symbols.map(sym => yahooFinance.quote(sym).catch(() => null)));
     
@@ -52,6 +57,8 @@ router.get('/trending', async (req, res) => {
       changePercent: quote.regularMarketChangePercent,
       analystRating: quote.averageAnalystRating
     }));
+    
+    if (formattedTrending.length === 0) throw new Error('Empty formatted trending results');
     res.json(formattedTrending);
   } catch (error) {
     console.error('Yahoo Finance trending blocked, using fallback data.');
