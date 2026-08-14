@@ -6,11 +6,11 @@ const yahooFinance = new YahooFinance();
 // Helper for trending fallback
 function getMockTrending() {
   return [
-    { symbol: 'AAPL', companyName: 'Apple Inc.', currentPrice: 150.25, change: 2.50, changePercent: 1.69 },
-    { symbol: 'TSLA', companyName: 'Tesla Inc.', currentPrice: 200.10, change: -5.20, changePercent: -2.53 },
-    { symbol: 'NVDA', companyName: 'NVIDIA Corporation', currentPrice: 450.00, change: 15.00, changePercent: 3.44 },
-    { symbol: 'MSFT', companyName: 'Microsoft Corp.', currentPrice: 330.50, change: 1.20, changePercent: 0.36 },
-    { symbol: 'GOOGL', companyName: 'Alphabet Inc.', currentPrice: 135.20, change: -0.80, changePercent: -0.58 }
+    { symbol: 'AAPL', companyName: 'Apple Inc.', currentPrice: 150.25, change: 2.50, changePercent: 1.69, analystRating: '1.9 - Buy' },
+    { symbol: 'TSLA', companyName: 'Tesla Inc.', currentPrice: 200.10, change: -5.20, changePercent: -2.53, analystRating: '2.5 - Hold' },
+    { symbol: 'NVDA', companyName: 'NVIDIA Corporation', currentPrice: 450.00, change: 15.00, changePercent: 3.44, analystRating: '1.2 - Strong Buy' },
+    { symbol: 'MSFT', companyName: 'Microsoft Corp.', currentPrice: 330.50, change: 1.20, changePercent: 0.36, analystRating: '1.5 - Strong Buy' },
+    { symbol: 'GOOGL', companyName: 'Alphabet Inc.', currentPrice: 135.20, change: -0.80, changePercent: -0.58, analystRating: '2.0 - Buy' }
   ];
 }
 
@@ -49,7 +49,8 @@ router.get('/trending', async (req, res) => {
       companyName: quote.shortName || quote.longName,
       currentPrice: quote.regularMarketPrice,
       change: quote.regularMarketChange,
-      changePercent: quote.regularMarketChangePercent
+      changePercent: quote.regularMarketChangePercent,
+      analystRating: quote.averageAnalystRating
     }));
     res.json(formattedTrending);
   } catch (error) {

@@ -68,6 +68,13 @@ export default function Dashboard({ onSelectStock, onOpenSearch }) {
                     </span>
                   </div>
                   <div className="trend-price">${item.currentPrice?.toFixed(2)}</div>
+                  {item.analystRating && (
+                    <div className="trend-rating" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem', fontWeight: '500' }}>
+                      Rating: <span style={{ color: item.analystRating.toLowerCase().includes('buy') ? 'var(--trend-up)' : item.analystRating.toLowerCase().includes('sell') ? 'var(--trend-down)' : 'var(--text-primary)' }}>
+                        {item.analystRating.includes('-') ? item.analystRating.split('-')[1].trim() : item.analystRating}
+                      </span>
+                    </div>
+                  )}
                 </div>
               );
             })}
