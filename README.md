@@ -6,7 +6,7 @@ This project was built to demonstrate proficiency in building scalable web appli
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 - **Secure Authentication:** Protected routes with JSON Web Token (JWT) authentication.
 - **Interactive Price Charts:** Historical stock data visualization using `Recharts` with custom tooltips and dynamic time intervals (1D, 1W, 1M, 6M, 1Y).
@@ -18,7 +18,7 @@ This project was built to demonstrate proficiency in building scalable web appli
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 **Frontend:**
 - React (Vite)
@@ -34,7 +34,7 @@ This project was built to demonstrate proficiency in building scalable web appli
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 To get a local copy up and running, follow these simple steps.
 
@@ -81,7 +81,7 @@ To get a local copy up and running, follow these simple steps.
 
 ---
 
-## ☁️ Deployment
+## Deployment
 
 StockDash is configured for 1-click deployment on platforms like Render or Heroku.
 
