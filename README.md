@@ -1,4 +1,4 @@
-# StockDash 📈
+# StockDash
 
 A modern, full-stack stock market analytics dashboard built with the **MERN** stack (MongoDB, Express, React, Node.js). StockDash provides real-time market data, interactive charting, analyst ratings, and a seamless portfolio tracking experience.
 
