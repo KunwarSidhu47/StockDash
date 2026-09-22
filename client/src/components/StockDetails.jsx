@@ -331,7 +331,12 @@ export default function StockDetails({ symbol, onBack }) {
                 <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer" className="news-item">
                   <div className="news-title">{item.title}</div>
                   <div className="news-meta">
-                    {item.publisher} • {new Date(item.providerPublishTime * 1000).toLocaleDateString()}
+                    {item.publisher} • {(() => {
+                      const raw = item.providerPublishTime || item.pubDate;
+                      if (!raw) return '';
+                      const date = (typeof raw === 'number' || /^\d+$/.test(raw)) ? new Date(Number(raw) * 1000) : new Date(raw);
+                      return isNaN(date.getTime()) ? '' : date.toLocaleDateString();
+                    })()}
                   </div>
                 </a>
               ))}
